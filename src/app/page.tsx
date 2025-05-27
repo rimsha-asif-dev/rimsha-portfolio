@@ -1,103 +1,147 @@
-import Image from "next/image";
+'use client'
+import React, { useEffect, useState } from 'react';
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaAws, FaFigma, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { SiTailwindcss, SiTypescript, SiReactquery, SiFirebase, SiApollographql, SiBootstrap, SiMui } from 'react-icons/si';
+import { RiNextjsFill } from "react-icons/ri";
+import { FaGithub } from "react-icons/fa6";
+import { FaHandPointDown } from "react-icons/fa";
+const skills = [
+  { name: 'HTML5', icon: <FaHtml5 size={40} color="#ff5722" /> },
+  { name: 'CSS', icon: <FaCss3Alt size={40} color="#2196f3" /> },
+  { name: 'JavaScript', icon: <FaJs size={40} color="#f7df1e" /> },
+  { name: 'React JS', icon: <FaReact size={40} color="#61dafb" /> },
+  { name: 'Next JS', icon: <RiNextjsFill size={40} color="#212033" /> },
+  { name: 'Tailwind CSS', icon: <SiTailwindcss size={40} color="#38bdf8" /> },
+  { name: 'Material UI', icon: <SiMui size={40} color="#007fff" /> },
+  { name: 'Bootstrap', icon: <SiBootstrap size={40} color="#7952b3" /> },
+  { name: 'TypeScript', icon: <SiTypescript size={40} color="#3178c6" /> },
+  { name: 'AWS', icon: <FaAws size={40} color="#ff9900" /> },
+  { name: 'React Query', icon: <SiReactquery size={40} color="#ff4154" /> },
+  { name: 'API Integration', icon: <SiApollographql size={40} color="#00b8d9" /> },
+  { name: 'Git', icon: <FaGithub size={40} color="#212033" /> },
+  { name: 'Firebase', icon: <SiFirebase size={40} color="#ffcb2b" /> },
+  { name: 'Figma', icon: <FaFigma size={40} color="#f24e1e" /> },
+];
 
-export default function Home() {
+function StatsBar({ showStats }: { showStats: boolean }) {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="w-full flex justify-center mb-8 px-2">
+      <div className="flex flex-col md:flex-row gap-6 w-full max-w-3xl justify-center">
+        {/* Left Card */}
+        <div className={`flex flex-col items-center  rounded-lg py-6 px-6 transition-all duration-700 ${showStats ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-16'}`}>
+          <span className="text-4xl font-extrabold text-white">2.5</span>
+          <span className="text-base text-gray-300 mt-1">Years of Experience</span>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        {/* Center Card */}
+        <div className={`flex flex-col items-center  rounded-lg py-6 px-6 transition-all duration-700 delay-150 ${showStats ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-16'}`}>
+          <span className="text-4xl font-extrabold text-white">5</span>
+          <span className="text-base text-gray-300 mt-1">Projects Completed</span>
+        </div>
+        {/* Right Card */}
+        <div className={`flex flex-col items-center  rounded-lg py-6 px-6 transition-all duration-700 delay-300 ${showStats ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-16'}`}>
+          <span className="text-4xl font-extrabold text-white">15</span>
+          <span className="text-base text-gray-300 mt-1">Technologies Used</span>
+        </div>
+      </div>
     </div>
   );
 }
+
+export default function Home() {
+  const [showStats, setShowStats] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setShowStats(true), 200);
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#212033] px-2">
+      {/* Stats Bar - Desktop (above card) */}
+      <div className="hidden md:flex w-full">
+        <StatsBar showStats={showStats} />
+      </div>
+      {/* Profile Card */}
+      <div className="flex flex-col md:flex-row items-center bg-white rounded-xl shadow-lg p-6 md:p-12 max-w-3xl w-full mt-8 mb-8">
+        {/* Profile image with dark circle behind */}
+        <div className="relative min-w-[140px] md:min-w-[180px] flex-shrink-0 mb-6 md:mb-0">
+          <div className="absolute left-0 top-0 w-32 h-32 md:w-44 md:h-44 rounded-full bg-gray-800 -translate-x-4 md:-translate-x-8 translate-y-2 md:translate-y-4 z-0" />
+          <div className="w-32 h-32 md:w-44 md:h-44 rounded-full overflow-hidden border-4 border-gray-200 bg-gray-100 relative z-10">
+            <img
+              src="/pfp.jpeg"
+              alt="Profile"
+              className="object-cover w-full h-full"
+            />
+          </div>
+        </div>
+        {/* Text content */}
+        <div className="md:ml-12 flex-1 text-center md:text-left">
+          <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900 mb-2 leading-tight flex items-center justify-center md:justify-start gap-2">
+            Hi <span
+              role="img"
+              aria-label="wave"
+              className={`inline-block animate-wave-once`}
+            >
+              👋
+            </span>, I am Rimsha Asif
+          </h1>
+          <div className="mx-auto w-24 md:mx-0  md:w-[95%] border-b-2 border-dotted border-gray-400 mb-4" />
+          <p className="text-base md:text-lg text-gray-700 mb-2">
+            Web Developer specializing in accessibility and modern UI/UX design.
+          </p>
+          <p className="text-xs md:text-sm text-gray-500">
+            Welcome to my portfolio. I am a skilled developer with expertise in modern web technologies.
+            My focus is on creating efficient, scalable, and user-friendly applications
+            that solve real-world problems.
+          </p>
+          <div className="flex flex-row items-center gap-3 mt-2 justify-center md:justify-start">
+            <button className="bg-green-400 hover:bg-[#212033] cursor-pointer text-white px-4 py-1 rounded-full">
+              Download CV
+            </button>
+            <a href="https://www.instagram.com/rimshayyy07?igsh=NXQ5aDdjZnJtbXoz&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-[#E4405F] hover:scale-110 transition-transform">
+              <FaInstagram size={28} />
+            </a>
+            <a href="https://www.linkedin.com/in/rimsha-asif-093786264/" target="_blank" rel="noopener noreferrer" className="text-[#0077b5] hover:scale-110 transition-transform">
+              <FaLinkedin size={28} />
+            </a>
+            <a href="https://github.com/rimshaasif20" target="_blank" rel="noopener noreferrer" className="text-[#212033] hover:scale-110 transition-transform">
+              <FaGithub size={28} />
+            </a>
+          </div>
+        </div>
+      </div>
+      {/* Stats Bar - Mobile (below card) */}
+      <div className="flex md:hidden w-full">
+        <StatsBar showStats={showStats} />
+      </div>
+      {/* Skills Section */}
+      <div className="w-full max-w-5xl px-1 pb-10">
+        <h2 className="text-xl flex items-center justify-center gap-2 md:text-2xl font-bold text-white mb-6 md:mb-8 text-center">Tools & Technologies <FaHandPointDown size={25} color="#FFC23D" /></h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-6">
+          {skills.map((skill, idx) => (
+            <div
+              key={skill.name || idx}
+              className="flex flex-col items-center justify-center bg-white border border-green-400 rounded-lg p-3 md:p-6 shadow-md transition-transform hover:scale-105"
+            >
+              {skill.icon}
+              <span className="mt-2 md:mt-4 text-[#212033] text-xs md:text-base font-medium text-center">
+                {skill.name}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Footer */}
+      <footer className="w-full py-6 flex justify-center items-center bg-transparent ">
+        <span className="text-gray-400 text-sm text-end flex items-end gap-2">
+          Designed & Developed by 
+          <span className="font-semibold text-white ">Rimsha Asif</span>
+          <img
+            src="/developer.png"
+            alt="Rimsha Asif"
+            className="w-8 h-8   object-cover"
+          />
+        </span>
+      </footer>
+    </div>
+  );
+} 
