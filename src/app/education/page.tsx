@@ -74,14 +74,14 @@ export default function Education() {
     },
     {
       degree: "Intermediate in Computer Science(ICS)",
-      school: "Government Graduate College For Girls Baghbanpura Lahoree",
+      school: "Government Graduate College For Girls Baghbanpura Lahore",
       year: "2016 - 2018",
       description: "Completed Intermediate in Computer Science (ICS) with a strong focus on structured programming using C++, database systems, and computer fundamentals. Developed essential problem-solving and logical reasoning skills. This experience sparked my interest in software development and set a strong foundation for my future academic and professional pursuits in the tech industry.",
       logo: "/college.jpg"
     },
     {
       degree: "Matriculation ",
-      school: "Govt. Girls High School Lahore",
+      school: "Govt. Girls High School Baghbanpura Lahore",
       year: "2014 - 2016",
       description: "Completed Matriculation in Science with a focus on Mathematics, Physics, and Computer Science. Developed strong analytical and problem-solving skills along with a keen interest in computers. This early exposure to computer fundamentals motivated me to pursue Intermediate studies in Computer Science and eventually a career in the tech field.",
       logo: "/school.jpg"
