@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className + " flex flex-col min-h-screen"}>
         <Header />
-        <main className="pt-16 flex-1">
+        <main className="pt-16 flex-1 bg-white">
           {children}
         </main>
         <footer className="w-full py-6 flex justify-center items-center bg-[#212033] z-20 ">

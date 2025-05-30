@@ -61,7 +61,7 @@ export default function Home() {
         <StatsBar showStats={showStats} />
       </div>
       {/* Profile Card */}
-      <div className="flex flex-col md:flex-row items-center inset-shadow-sm inset-shadow-indigo-500  shadow-blue-500/50 bg-white rounded-xl shadow-lg p-6 md:p-12 max-w-3xl w-full  mb-8">
+      <div className="flex flex-col md:flex-row items-center inset-shadow-sm inset-shadow-indigo-500  shadow-blue-500/50 bg-white rounded-xl shadow-lg p-6 md:p-12 max-w-3xl w-full mt-2  mb-8">
         {/* Profile image with dark circle behind */}
         <div className="relative min-w-[140px] md:min-w-[180px] flex-shrink-0 mb-6 md:mb-0">
           <div className="absolute left-0 top-0 w-32 h-32 md:w-44 md:h-44 rounded-full bg-gray-800 -translate-x-4 shadow-blue-500/50 shadow-md md:-translate-x-8 translate-y-2 md:translate-y-4 z-0" />
