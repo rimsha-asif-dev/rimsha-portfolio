@@ -10,16 +10,10 @@ export default function Education() {
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
 
   const backgroundImages = [
-    
-   
     '/pic4.jpg',
     '/pic5.jpg',
-   
-    
     '/pic8.jpg',
     '/pic9.jpg',
-   
-    
   ];
 
   useEffect(() => {
@@ -132,7 +126,7 @@ export default function Education() {
             </p>
           </div>
           
-          <div className="max-w-3xl mx-auto space-y-8">
+          <div className="max-w-5xl mx-auto space-y-8">
             {educationData.map((edu, index) => (
               <div 
                 key={index} 
@@ -158,7 +152,7 @@ export default function Education() {
             }`}>
               <h1 className="text-3xl font-bold text-white text-center drop-shadow-lg mb-8">Certifications</h1>
             </div>
-            <div className="max-w-4xl mx-auto space-y-8">
+            <div className="max-w-5xl mx-auto space-y-8">
               {[
                 {
                   title: 'Computer Science Exhibition Participant',
