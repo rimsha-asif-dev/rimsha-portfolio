@@ -12,6 +12,7 @@ const Header = () => {
     { name: 'Education', path: '/education' },
     { name: 'Experience', path: '/experience' },
     { name: 'Projects', path: '/projects' },
+    { name: 'Hire Me', path: '/contact' },
   ];
 
   return (
@@ -37,7 +38,7 @@ const Header = () => {
                   href={item.path}
                   className={`text-sm font-medium transition-colors hover:text-blue-600 ${
                     pathname === item.path
-                      ? 'text-blue-600'
+                      ? 'text-blue-600 '
                       : 'text-white'
                   }`}
                 >

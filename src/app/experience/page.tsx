@@ -1,11 +1,12 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import Particles from "@tsparticles/react";
+
 import SuccessAnimation from "@/app/animations/job.json";
 import Lottie from "lottie-react";
 
 export default function Experience() {
   // Updated experience data
+
   const experienceData = [
     {
       title: "Frontend Web Developer",
@@ -55,7 +56,7 @@ export default function Experience() {
       skills: ["Node.js", "React.js", "Material UI", "Bootstrap", "Next.js", "REST API"]
     },
     {
-      title: "Internship",
+      title: "Intern",
       company: "AppsGenii Technologies",
       type: "Internship",
       location: "Lahore, Punjab, Pakistan · On-site",
@@ -71,7 +72,9 @@ export default function Experience() {
   // Animation state for cards and heading
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const [showHeading, setShowHeading] = useState(false);
+
   useEffect(() => {
+
     setTimeout(() => setShowHeading(true), 200); // Heading animates in first
     experienceData.forEach((_, idx) => {
       setTimeout(() => {

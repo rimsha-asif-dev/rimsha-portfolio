@@ -97,9 +97,7 @@ export default function Home() {
             <button className="bg-green-400 hover:bg-[#212033] cursor-pointer text-white px-4 py-1 rounded-full">
               Download CV
             </button>
-            <a href="https://www.instagram.com/rimshayyy07?igsh=NXQ5aDdjZnJtbXoz&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-[#E4405F] hover:scale-110 transition-transform">
-              <FaInstagram size={28} />
-            </a>
+           
             <a href="https://www.linkedin.com/in/rimsha-asif-093786264/" target="_blank" rel="noopener noreferrer" className="text-[#0077b5] hover:scale-110 transition-transform">
               <FaLinkedin size={28} />
             </a>
