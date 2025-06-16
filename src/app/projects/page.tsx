@@ -89,7 +89,7 @@ Key Features:
         "React Query"
       ],
       image: "/simply.svg", // Replace with your actual image path
-     
+      link: "https://simply-ortho-dev.vercel.app/",
     },
     {
       title: "B&B Event Smart",
@@ -112,7 +112,7 @@ technologies: [
   "React Query"
 ],
       image: "/bnb_logo3.svg", // Replace with your actual image path
-      
+      link: "https://bnb-web-three-dev.vercel.app",
     },
     {
       title: "iGotPlans",
@@ -134,7 +134,7 @@ technologies: [
         "Firebase"
       ],
       image: "/logo-light.png", // Replace with your actual image path
-     
+      link: "https://igotplans-nine.vercel.app",
     },
   ];
 
