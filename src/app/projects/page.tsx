@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Lottie from "lottie-react";
 import SuccessAnimation from "@/app/animations/laptop.json";
+import Animation from "../components/ParticlesBag";
 
 export default function Projects() {
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
@@ -139,7 +140,8 @@ technologies: [
 
   return (
     <div className="container mx-auto px-2 sm:px-4 md:px-8 py-8 md:py-12">
-      <div className="flex  items-center justify-center  ">
+      <Animation />
+      <div className="flex  items-center justify-center z-80  ">
       <h1 className="text-5xl sm:text-3xl md:text-6xl font-bold text-gray-900 mb-6 md:mb-10 text-center">
         Projects
       </h1>

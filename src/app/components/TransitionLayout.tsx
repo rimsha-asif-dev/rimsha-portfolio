@@ -2,6 +2,7 @@
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import PageTransitionLottie from "./PageTransitionLottie";
+import Animation from "./ParticlesBag";
 
 export default function TransitionLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -20,7 +21,7 @@ export default function TransitionLayout({ children }: { children: React.ReactNo
 
   return (
     <>
-      {loading && <PageTransitionLottie onComplete={() => {}} />}
+        <Animation /> 
       {showChildren && children}
     </>
   );

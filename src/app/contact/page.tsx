@@ -4,6 +4,7 @@ import Lottie from 'lottie-react';
 import animationData from '@/app/animations/hire.json'; // or your preferred animation
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
+
 export default function ContactPage() {
     const redirectToEmailClient = ( recipientEmail: string) => {
       debugger
@@ -17,8 +18,11 @@ export default function ContactPage() {
         window.location.href = mailtoURL;
       };
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-white items-center justify-center px-4 md:px-8 lg:px-20 py-8 gap-6">
+    <div className=" flex flex-col md:flex-row min-h-screen bg-white items-center justify-center px-4 md:px-8 lg:px-20 py-8 gap-6">
       {/* Left: Contact Info */}
+   
+     
+    
       <div className="flex-1 flex flex-col justify-end items-center text-[#212033] w-[70%]">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact me</h1>
         <p className="mb-8 text-lg md:text-xl text-gray-700 max-w-2xl">

@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Header from './components/Header';
-import TransitionLayout from "./components/TransitionLayout";
+
+
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,9 +23,9 @@ export default function RootLayout({
       <body className={inter.className + " flex flex-col min-h-screen"}>
         <Header />
         <main className="pt-16 flex-1 bg-white">
-          <TransitionLayout>
+        
             {children}
-          </TransitionLayout>
+         
         </main>
         <footer className="w-full py-6 flex justify-center items-center bg-[#212033] z-20 ">
           <span className="text-gray-400 text-sm text-end flex items-end gap-2">
