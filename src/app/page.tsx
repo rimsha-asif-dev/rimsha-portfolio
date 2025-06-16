@@ -1,26 +1,46 @@
-'use client'
-import React, { useEffect, useState } from 'react';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaAws, FaFigma, FaInstagram, FaLinkedin } from 'react-icons/fa';
-import { SiTailwindcss, SiTypescript, SiReactquery, SiFirebase, SiApollographql, SiBootstrap, SiMui } from 'react-icons/si';
+"use client";
+import React, { useEffect, useState } from "react";
+import {
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaReact,
+  FaAws,
+  FaFigma,
+  FaInstagram,
+  FaLinkedin,
+} from "react-icons/fa";
+import {
+  SiTailwindcss,
+  SiTypescript,
+  SiReactquery,
+  SiFirebase,
+  SiApollographql,
+  SiBootstrap,
+  SiMui,
+} from "react-icons/si";
 import { RiNextjsFill } from "react-icons/ri";
 import { FaGithub } from "react-icons/fa6";
 import { FaHandPointDown } from "react-icons/fa";
 const skills = [
-  { name: 'HTML5', icon: <FaHtml5 size={40} color="#ff5722" /> },
-  { name: 'CSS', icon: <FaCss3Alt size={40} color="#2196f3" /> },
-  { name: 'JavaScript', icon: <FaJs size={40} color="#f7df1e" /> },
-  { name: 'React JS', icon: <FaReact size={40} color="#61dafb" /> },
-  { name: 'Next JS', icon: <RiNextjsFill size={40} color="#212033" /> },
-  { name: 'Tailwind CSS', icon: <SiTailwindcss size={40} color="#38bdf8" /> },
-  { name: 'Material UI', icon: <SiMui size={40} color="#007fff" /> },
-  { name: 'Bootstrap', icon: <SiBootstrap size={40} color="#7952b3" /> },
-  { name: 'TypeScript', icon: <SiTypescript size={40} color="#3178c6" /> },
-  { name: 'AWS', icon: <FaAws size={40} color="#ff9900" /> },
-  { name: 'React Query', icon: <SiReactquery size={40} color="#ff4154" /> },
-  { name: 'API Integration', icon: <SiApollographql size={40} color="#00b8d9" /> },
-  { name: 'Git', icon: <FaGithub size={40} color="#212033" /> },
-  { name: 'Firebase', icon: <SiFirebase size={40} color="#ffcb2b" /> },
-  { name: 'Figma', icon: <FaFigma size={40} color="#f24e1e" /> },
+  { name: "HTML5", icon: <FaHtml5 size={40} color="#ff5722" /> },
+  { name: "CSS", icon: <FaCss3Alt size={40} color="#2196f3" /> },
+  { name: "JavaScript", icon: <FaJs size={40} color="#f7df1e" /> },
+  { name: "React JS", icon: <FaReact size={40} color="#61dafb" /> },
+  { name: "Next JS", icon: <RiNextjsFill size={40} color="#212033" /> },
+  { name: "Tailwind CSS", icon: <SiTailwindcss size={40} color="#38bdf8" /> },
+  { name: "Material UI", icon: <SiMui size={40} color="#007fff" /> },
+  { name: "Bootstrap", icon: <SiBootstrap size={40} color="#7952b3" /> },
+  { name: "TypeScript", icon: <SiTypescript size={40} color="#3178c6" /> },
+  { name: "AWS", icon: <FaAws size={40} color="#ff9900" /> },
+  { name: "React Query", icon: <SiReactquery size={40} color="#ff4154" /> },
+  {
+    name: "API Integration",
+    icon: <SiApollographql size={40} color="#00b8d9" />,
+  },
+  { name: "Git", icon: <FaGithub size={40} color="#212033" /> },
+  { name: "Firebase", icon: <SiFirebase size={40} color="#ffcb2b" /> },
+  { name: "Figma", icon: <FaFigma size={40} color="#f24e1e" /> },
 ];
 
 function StatsBar({ showStats }: { showStats: boolean }) {
@@ -28,19 +48,41 @@ function StatsBar({ showStats }: { showStats: boolean }) {
     <div className="w-full flex justify-center mb-4 px-2">
       <div className="flex flex-col md:flex-row gap-6 w-full max-w-3xl justify-center">
         {/* Left Card */}
-        <div className={`flex flex-col items-center  rounded-lg py-6 px-6 transition-all duration-700 ${showStats ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-16'}`}>
+        <div
+          className={`flex flex-col items-center  rounded-lg py-6 px-6 transition-all duration-700 ${
+            showStats
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 -translate-x-16"
+          }`}
+        >
           <span className="text-4xl font-extrabold text-[#212033]">2.5</span>
-          <span className="text-base text-[#212033] mt-1">Years of Experience</span>
+          <span className="text-base text-[#212033] mt-1">
+            Years of Experience
+          </span>
         </div>
         {/* Center Card */}
-        <div className={`flex flex-col items-center  rounded-lg py-6 px-6 transition-all duration-700 delay-150 ${showStats ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-16'}`}>
+        <div
+          className={`flex flex-col items-center  rounded-lg py-6 px-6 transition-all duration-700 delay-150 ${
+            showStats
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-16"
+          }`}
+        >
           <span className="text-4xl font-extrabold text-[#212033]">5</span>
-          <span className="text-base text-[#212033] mt-1">Projects Completed</span>
+          <span className="text-base text-[#212033] mt-1">
+            Projects Completed
+          </span>
         </div>
         {/* Right Card */}
-        <div className={`flex flex-col items-center  rounded-lg py-6 px-6 transition-all duration-700 delay-300 ${showStats ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-16'}`}>
+        <div
+          className={`flex flex-col items-center  rounded-lg py-6 px-6 transition-all duration-700 delay-300 ${
+            showStats ? "opacity-100 translate-x-0" : "opacity-0 translate-x-16"
+          }`}
+        >
           <span className="text-4xl font-extrabold text-[#212033]">15</span>
-          <span className="text-base text-[#212033] mt-1">Technologies Used</span>
+          <span className="text-base text-[#212033] mt-1">
+            Technologies Used
+          </span>
         </div>
       </div>
     </div>
@@ -76,32 +118,49 @@ export default function Home() {
         {/* Text content */}
         <div className="md:ml-12 flex-1 text-center md:text-left">
           <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900 mb-2 leading-tight flex items-center justify-center md:justify-start gap-2">
-            Hi,<span
+            Hi,
+            <span
               role="img"
               aria-label="wave"
               className={`inline-block animate-wave-once`}
             >
-            👋
-            </span>I am Rimsha Asif
+              👋
+            </span>
+            I am Rimsha Asif
           </h1>
           <div className="mx-auto w-24 md:mx-0  md:w-[95%] border-b-2 border-dotted border-gray-400 mb-4" />
           <p className="text-base md:text-lg text-gray-700 mb-2">
             Web Developer specializing in accessibility and modern UI/UX design.
           </p>
           <p className="text-xs md:text-sm text-gray-500">
-            Welcome to my portfolio. I am a skilled developer with expertise in modern web technologies.
-            My focus is on creating efficient, scalable, and user-friendly applications
-            that solve real-world problems.
+            Welcome to my portfolio. I am a skilled developer with expertise in
+            modern web technologies. My focus is on creating efficient,
+            scalable, and user-friendly applications that solve real-world
+            problems.
           </p>
           <div className="flex flex-row items-center gap-3 mt-2 justify-center md:justify-start">
-            <button className="bg-green-400 hover:bg-[#212033] cursor-pointer text-white px-4 py-1 rounded-full">
+            <a
+              href="/Rimsha Asif.pdf"
+              download="Rimsha_Asif.pdf"
+              className="bg-green-400 hover:bg-[#212033] cursor-pointer text-white px-4 py-1 rounded-full flex items-center justify-center"
+            >
               Download CV
-            </button>
-           
-            <a href="https://www.linkedin.com/in/rimsha-asif-093786264/" target="_blank" rel="noopener noreferrer" className="text-[#0077b5] hover:scale-110 transition-transform">
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/rimsha-asif-093786264/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#0077b5] hover:scale-110 transition-transform"
+            >
               <FaLinkedin size={28} />
             </a>
-            <a href="https://github.com/rimshaasif20" target="_blank" rel="noopener noreferrer" className="text-[#212033] hover:scale-110 transition-transform">
+            <a
+              href="https://github.com/rimshaasif20"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#212033] hover:scale-110 transition-transform"
+            >
               <FaGithub size={28} />
             </a>
           </div>
@@ -113,7 +172,10 @@ export default function Home() {
       </div>
       {/* Skills Section */}
       <div className="w-full max-w-5xl px-1 pb-10">
-        <h2 className="text-xl flex items-center justify-center gap-2 md:text-2xl font-bold text-[#212033] mb-6 md:mb-8 text-center">Tools & Technologies <FaHandPointDown size={25} color="#FFC23D" /> I know?</h2>
+        <h2 className="text-xl flex items-center justify-center gap-2 md:text-2xl font-bold text-[#212033] mb-6 md:mb-8 text-center">
+          Tools & Technologies <FaHandPointDown size={25} color="#FFC23D" /> I
+          know?
+        </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-6">
           {skills.map((skill, idx) => (
             <div
@@ -129,7 +191,6 @@ export default function Home() {
         </div>
       </div>
       {/* Footer */}
-    
     </div>
   );
-} 
+}
