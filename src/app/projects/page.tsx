@@ -36,7 +36,7 @@ export default function Projects() {
       ],
 
       image: "/africa-logo.png",
-      link: "https://99k-africa.com/",
+      link: "https://99kafrica.com/",
     },
     {
       title: "Vet your pep",
