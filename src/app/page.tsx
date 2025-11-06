@@ -133,12 +133,12 @@ export default function Home() {
             Web Developer specializing in accessibility and modern UI/UX design.
           </p>
           <p className="text-xs md:text-sm text-gray-500">
-            Welcome to my portfolio. I am a skilled developer with expertise in
+            Welcome to my portfolio. I am a skilled frontend developer with expertise in
             modern web technologies. My focus is on creating efficient,
             scalable, and user-friendly applications that solve real-world
             problems.
           </p>
-          <div className="flex flex-row items-center gap-3 mt-2 justify-center md:justify-start">
+          {/* <div className="flex flex-row items-center gap-3 mt-2 justify-center md:justify-start">
             <a
               href="/Rimsha Asif.pdf"
               download="Rimsha_Asif.pdf"
@@ -163,7 +163,7 @@ export default function Home() {
             >
               <FaGithub size={28} />
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
       {/* Stats Bar - Mobile (below card) */}

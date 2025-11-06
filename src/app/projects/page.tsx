@@ -19,6 +19,26 @@ export default function Projects() {
 
   const projectsData = [
     {
+      title: "99k Africa",
+      description: `99K Africa is a modern multivendor e-commerce platform designed to connect customers and vendors across Africa. The platform enables seamless buying and selling of products through a user-friendly interface, supporting complete order management, vendor dashboards, and marketplace features.
+      Key Features:
+• Multivendor Marketplace: Vendors can register, create stores, and manage their products, while customers can browse, add to cart, and purchase items securely.
+• Dual Role System: Supports both Customer and Vendor roles with dedicated dashboards for managing orders, sales, and purchases.
+• Product Management: Vendors can easily add, edit, and organize products with images, categories, and pricing details.
+• Order & Payment Flow: Customers can place orders, track shipment and delivery status, and manage refunds or returns.`,
+      
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "PostgreSQL",
+       "Rest API",
+      ],
+
+      image: "/africa-logo.png",
+      link: "https://99k-africa.com/",
+    },
+    {
       title: "Vet your pep",
       description: `Vet Your Pep is a dynamic social networking platform built for individuals interested in health, wellness, peptides, and lifestyle optimization. It provides a space for users to connect, share, and learn within focused community groups.
 
@@ -89,7 +109,7 @@ Key Features:
         "React Query"
       ],
       image: "/simply.svg", // Replace with your actual image path
-      link: "https://simply-ortho-dev.vercel.app/",
+      link: "https://simplyortho-academy.com/",
     },
     {
       title: "B&B Event Smart",
@@ -112,30 +132,30 @@ technologies: [
   "React Query"
 ],
       image: "/bnb_logo3.svg", // Replace with your actual image path
-      link: "https://bnb-web-three-dev.vercel.app",
+      link: "https://www.bbeventsmart.com/",
     },
-    {
-      title: "iGotPlans",
-      description: `iGotPlans is a user-friendly event management web application that allows users to discover, browse, and purchase tickets for events in their area. The platform is designed to make event planning and participation seamless for both attendees and organizers.
+    // {
+    //   title: "iGotPlans",
+    //   description: `iGotPlans is a user-friendly event management web application that allows users to discover, browse, and purchase tickets for events in their area. The platform is designed to make event planning and participation seamless for both attendees and organizers.
     
-    Key Features:
-    • Event Discovery: Browse recommended and trending events tailored to your interests and location.
-    • Ticket Purchasing: Securely buy tickets for events directly through the platform.
-    • Personal Dashboard: View your attended and favorite events, manage tickets, and keep track of your event calendar.
-    • Organizer Tools: Event organizers can list new events, manage ticket sales, and reach a wider audience.
-    • Search & Filters: Easily search for events and use filters to find exactly what you're looking for.
-    • Wallet Integration: Manage your event payments and transactions within the app.
-    • Modern UI/UX: Clean, responsive, and intuitive interface for a smooth user experience.`,
-      technologies: [
-        "React",
-        "Next.js",
-        "TypeScript",
-        "Tailwind CSS",
-        "Firebase"
-      ],
-      image: "/logo-light.png", // Replace with your actual image path
-      link: "https://igotplans-nine.vercel.app",
-    },
+    // Key Features:
+    // • Event Discovery: Browse recommended and trending events tailored to your interests and location.
+    // • Ticket Purchasing: Securely buy tickets for events directly through the platform.
+    // • Personal Dashboard: View your attended and favorite events, manage tickets, and keep track of your event calendar.
+    // • Organizer Tools: Event organizers can list new events, manage ticket sales, and reach a wider audience.
+    // • Search & Filters: Easily search for events and use filters to find exactly what you're looking for.
+    // • Wallet Integration: Manage your event payments and transactions within the app.
+    // • Modern UI/UX: Clean, responsive, and intuitive interface for a smooth user experience.`,
+    //   technologies: [
+    //     "React",
+    //     "Next.js",
+    //     "TypeScript",
+    //     "Tailwind CSS",
+    //     "Firebase"
+    //   ],
+    //   image: "/logo-light.png", // Replace with your actual image path
+    //   link: "https://igotplans-nine.vercel.app",
+    // },
   ];
 
   return (

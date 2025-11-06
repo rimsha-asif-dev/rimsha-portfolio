@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Lottie from "lottie-react";
-import animationData from "@/app/animations/hire.json"; // or your preferred animation
+import animationData from "@/app/animations/contact.json"; // or your preferred animation
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function ContactPage() {
@@ -43,14 +43,14 @@ export default function ContactPage() {
           >
             <FaLinkedin size={28} />
           </a>
-          <a
+          {/* <a
             href="https://github.com/rimshaasif20"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[#212033] hover:scale-110 transition-transform"
           >
             <FaGithub size={28} />
-          </a>
+          </a> */}
           {/* Add more icons as needed */}
         </div>
       </div>
