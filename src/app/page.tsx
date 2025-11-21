@@ -1,8 +1,9 @@
 "use client"
 // pages/index.js
 import Head from 'next/head';
-import { useState, useRef } from 'react';
-import emailjs from '@emailjs/browser';
+import { useState } from 'react';
+import Lottie from 'lottie-react';
+import animationData from '@/app/animations/contact.json';
 import { 
   FaHtml5, 
   FaCss3Alt, 
@@ -31,13 +32,12 @@ import Image from 'next/image';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('home');
-  const [formData, setFormData] = useState({
-    from_name: '',
-    from_email: '',
-    message: ''
-  });
-  const [isSending, setIsSending] = useState(false);
-  const [sendStatus, setSendStatus] = useState('');
+  
+  const redirectToEmailClient = (recipientEmail: string) => {
+    const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipientEmail)}`;
+    window.open(gmailURL, "_blank");
+  };
+
   const technologies = [
     { name: 'HTML5', icon: <FaHtml5 className="text-[#f16529]" /> },
     { name: 'CSS', icon: <FaCss3Alt className="text-[#2965f1]" /> },
@@ -62,67 +62,6 @@ export default function Home() {
     { name: 'Figma', icon: <FaFigma className="text-[#f24e1e]" /> }
   ];
 
-  const emailConfig = {
-    serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-    templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-    publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-  };
-
-  const form = useRef<HTMLFormElement>(null);
-
-  const handleInputChange = (e: any) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e: any) => {
-   
-  
-    try{
-      setIsSending(true)
-      console.log(formData);
-      setFormData({ from_name: '', from_email: '', message: '' });
-      setIsSending(false)
-    }catch(error){
-      console.error('Error sending email:', error);
-    }
-    // const { serviceId, templateId, publicKey } = emailConfig;
-    // if (!serviceId || !templateId || !publicKey) {
-    //   setSendStatus('config-error');
-    //   setTimeout(() => setSendStatus(''), 5000);
-    //   return;
-    // }
-
-    // setIsSending(true);
-    // const currentForm = form.current;
-    // if (!currentForm) {
-    //   setIsSending(false);
-    //   return;
-    // }
-
-    // // EmailJS configuration
-    // emailjs.sendForm(
-    //   serviceId,
-    //   templateId,
-    //   currentForm,
-    //   publicKey
-    // )
-    // .then((result) => {
-    //   console.log('Email sent successfully:', result.text);
-    //   setSendStatus('success');
-    //   setFormData({ from_name: '', from_email: '', message: '' });
-    // })
-    // .catch((error) => {
-    //   console.error('Error sending email:', error.text);
-    //  // setSendStatus('error');
-    // })
-    // .finally(() => {
-    //   setIsSending(false);
-    //   setTimeout(() => setSendStatus(''), 5000);
-    // });
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
@@ -264,7 +203,7 @@ export default function Home() {
             </div>
             <div className="grid gap-4">
                 {[
-                  { label: 'Specialties', value: 'Web platforms · Admin portals', accent: 'from-sky-500 to-cyan-500' },
+                  { label: 'Education', value: 'Bachelor in Computer Science · 2022', accent: 'from-sky-500 to-cyan-500' },
                   { label: 'Principles', value: 'Performance, accessibility, empathy', accent: 'from-amber-500 to-orange-500' },
                   { label: 'Interests', value: 'UI polish, real-time UX, scalable design systems', accent: 'from-blue-500 to-indigo-500' },
                   { label: 'Languages', value: 'English, Urdu, Punjabi', accent: 'from-purple-500 to-pink-500' },
@@ -563,7 +502,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* Contact Section - Redesigned */}
+      {/* Contact Section */}
       <section id="contact" className="py-16 bg-gray-50">
         <div className="container mx-auto px-6 max-w-5xl">
           <div className="text-center mb-12">
@@ -626,90 +565,27 @@ export default function Home() {
               </div>
 
               {/* Contact Form - Compact Layout */}
-              <div className="md:col-span-2 p-8 md:p-10">
-                <form ref={form} onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
-                      <input 
-                        type="text" 
-                        name="from_name"
-                        value={formData.from_name}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                        placeholder="Your Name"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                      <input 
-                        type="email" 
-                        name="from_email"
-                        value={formData.from_email}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                        placeholder="your.email@example.com"
-                        required
-                      />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                    <textarea 
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      rows={4}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-1 focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                      placeholder="Your message..."
-                      required
-                    ></textarea>
-                  </div>
-                  
-                  <button 
-                    type="submit"
-                    disabled={isSending}
-                    className="w-full bg-blue-600 cursor-pointer text-white py-3 rounded-lg font-medium hover:bg-blue-700 disabled:bg-blue-400 transition-colors shadow-lg flex items-center justify-center space-x-2"
-                  >
-                    {isSending ? (
-                      <>
-                        <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        <span>Sending...</span>
-                      </>
-                    ) : (
-                      <>
-                        <span>Send Message</span>
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                        </svg>
-                      </>
-                    )}
-                  </button>
-                </form>
-
+              <div className="md:col-span-2 mb-10">
+              
                 {/* Status Messages */}
-                {sendStatus === 'success' && (
-                  <div className="mt-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg text-center">
-                    ✅ Message sent successfully! I'll get back to you soon.
-                  </div>
-                )}
-                
-                {sendStatus === 'error' && (
-                  <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-center">
-                    ❌ Failed to send message. Please try again or email me directly.
-                  </div>
-                )}
-
-                {sendStatus === 'config-error' && (
-                  <div className="mt-4 p-3 bg-yellow-100 border border-yellow-400 text-yellow-700 rounded-lg text-center">
-                    ⚠️ Email service is not configured. Please add your EmailJS keys to the environment variables.
-                  </div>
-                )}
+                <div className="flex flex-col items-center justify-center">
+            <div className="w-full max-w-md ">
+              <Lottie
+                animationData={animationData}
+                loop={true}
+                style={{ width: "100%", height: "auto" }}
+              />
+            </div>
+            <button
+              onClick={() => redirectToEmailClient("rimshaasif873@gmail.com")}
+              className="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white font-semibold px-8 py-4 rounded-lg transition-colors shadow-lg flex items-center justify-center space-x-2"
+            >
+              <span>Contact via Email</span>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </button>
+          </div>
 
                 <div className="mt-6 text-center text-sm text-gray-500">
                   <p>I typically respond within 24 hours</p>
