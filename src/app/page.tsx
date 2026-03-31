@@ -222,6 +222,7 @@ function CaseStudiesMotionSection() {
   const a = MOTION_GALLERY_ACCENTS[study.accent];
   const frames = study.frames;
   const n = frames.length;
+  const activeSlideIndex = n > 0 ? Math.min(slideIndex, n - 1) : 0;
 
   useEffect(() => {
     setSlideIndex(0);
@@ -244,13 +245,13 @@ function CaseStudiesMotionSection() {
   };
 
   return (
-    <section id="case-studies" className="border-t border-white/5 bg-black py-20">
+    <section id="case-studies" className="border-t border-white/5 bg-black py-6">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         <div className="mb-8 text-center lg:text-left">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-400">Portfolio</p>
           <h2 className="mt-2 text-3xl font-bold text-white sm:text-4xl">Case studies</h2>
           <p className="mx-auto mt-3 max-w-2xl text-gray-400 lg:mx-0">
-          Explore a complete visual showcase of my projects—select any project to experience its full design and user interface. If you’d like to see more in detail, click the link below.
+          Explore a complete visual showcase of my projects—select any project to experience its design and user interface. If you’d like to see more in detail, click the link below.
           </p>
         </div>
 
@@ -262,11 +263,14 @@ function CaseStudiesMotionSection() {
                 type="button"
                 role="tab"
                 aria-selected={i === studyIndex}
-                onClick={() => setStudyIndex(i)}
+                onClick={() => {
+                  setStudyIndex(i);
+                  setSlideIndex(0);
+                }}
                 className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
                   i === studyIndex
                     ? CASE_STUDY_TAB_ACTIVE[s.accent]
-                    : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'
+                    : 'bg-white text-gray-600 hover:bg-white/10 hover:text-white'
                 }`}
               >
                 {s.label}
@@ -296,14 +300,14 @@ function CaseStudiesMotionSection() {
         <p className="mb-6 text-sm text-gray-300 sm:text-base">{study.description}</p>
 
         <div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
-          <div className="flex gap-2 overflow-x-auto pb-1 lg:w-28 lg:flex-shrink-0 lg:flex-col lg:overflow-y-auto lg:pb-0 lg:pr-1">
+          <div className="flex gap-2 overflow-x-auto pb-1 lg:hidden">
             {frames.map((frame, i) => (
               <button
                 key={frame.src}
                 type="button"
                 onClick={() => setSlideIndex(i)}
                 className={`relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 bg-zinc-950 transition-all lg:h-[4.5rem] lg:w-full ${
-                  i === slideIndex ? a.thumbActive : 'border-transparent opacity-70 hover:opacity-100'
+                  i === activeSlideIndex ? a.thumbActive : 'border-transparent opacity-70 hover:opacity-100'
                 }`}
               >
                 <img
@@ -324,14 +328,14 @@ function CaseStudiesMotionSection() {
             <div className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 shadow-xl">
               <div
                 ref={mainViewerScrollRef}
-                className="max-h-[min(92vh,1400px)] w-full overflow-y-auto overscroll-y-contain"
+                className="w-full overflow-hidden"
               >
                 <div className="overflow-x-hidden">
                   <div
                     className="flex transition-transform duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
                     style={{
                       width: `${n * 100}%`,
-                      transform: `translateX(-${(100 / n) * slideIndex}%)`,
+                      transform: `translateX(-${(100 / n) * activeSlideIndex}%)`,
                     }}
                   >
                     {frames.map((frame) => (
@@ -343,8 +347,8 @@ function CaseStudiesMotionSection() {
                         <img
                           src={frame.src}
                           alt={frame.caption}
-                          className="h-auto w-full max-w-full object-contain object-top"
-                          loading={frame.src === frames[slideIndex].src ? 'eager' : 'lazy'}
+                          className="h-auto max-h-[min(82vh,1100px)] w-full max-w-full object-contain object-top"
+                          loading={frame.src === frames[activeSlideIndex].src ? 'eager' : 'lazy'}
                         />
                       </div>
                     ))}
@@ -368,7 +372,7 @@ function CaseStudiesMotionSection() {
                 <IoChevronForward className="h-5 w-5" />
               </button>
               <div className="pointer-events-none absolute bottom-3 left-1/2 z-10 -translate-x-1/2 rounded-full bg-black/55 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
-                {slideIndex + 1} / {n} · {frames[slideIndex].caption}
+                {activeSlideIndex + 1} / {n} · {frames[activeSlideIndex].caption}
               </div>
             </div>
 
@@ -379,7 +383,7 @@ function CaseStudiesMotionSection() {
                   type="button"
                   onClick={() => setSlideIndex(i)}
                   className={`group/strip relative flex min-h-0 min-w-0 flex-1 basis-0 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 transition-[flex-grow] duration-500 ease-out hover:flex-[2] ${
-                    i === slideIndex ? a.stripActive : ''
+                    i === activeSlideIndex ? a.stripActive : ''
                   }`}
                 >
                   <img
@@ -396,7 +400,7 @@ function CaseStudiesMotionSection() {
             </div>
 
             <p className="text-center text-sm text-gray-500 md:hidden">
-              {slideIndex + 1} / {n} — {frames[slideIndex].caption}
+              {activeSlideIndex + 1} / {n} — {frames[activeSlideIndex].caption}
             </p>
 
             <div className="flex justify-center">
@@ -553,7 +557,7 @@ export default function Home() {
     <div className="min-h-screen bg-black">
       <Head>
         <title>Rimsha Asif - Frontend Developer</title>
-        <meta name="description" content="Frontend Developer with 2+ years of experience building responsive web applications" />
+        <meta name="description" content="Frontend Developer with 3+ years of experience building responsive web applications" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -647,10 +651,10 @@ export default function Home() {
               </div>
             </div>
             <div className="relative">
-            <div className="bg-black rounded-2xl p-8 text-white shadow-2xl border border-gray-800">
+            <div className="bg-blue-600 rounded-2xl p-8 text-white shadow-2xl border border-gray-800">
                 <div className="grid grid-cols-2 gap-6">
                   <div className="bg-white/20 rounded-xl p-4 backdrop-blur-sm">
-                    <div className="text-3xl font-bold">2+</div>
+                    <div className="text-3xl font-bold">3+</div>
                     <div className="text-sm opacity-90">Years Experience</div>
                   </div>
                   <div className="bg-white/20 rounded-xl p-4 backdrop-blur-sm">
@@ -682,7 +686,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-black">
+      <section id="about" className="py-16 bg-black">
         <div className="container mx-auto max-w-6xl px-6">
           <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="space-y-6">
@@ -713,7 +717,7 @@ export default function Home() {
                 ].map((item, index) => (
                   <div
                     key={index}
-                    className="rounded-2xl border border-gray-700 bg-gray-800/80 p-5 shadow-sm shadow-gray-800/50"
+                    className="rounded-2xl border border-blue-300 bg-gray-800/80 p-5 shadow-sm shadow-gray-800/50"
                   >
                     <h3 className="text-base font-semibold text-white">{item.title}</h3>
                     <p className="mt-2 text-sm text-gray-300">{item.description}</p>
@@ -730,7 +734,7 @@ export default function Home() {
               ].map((card, index) => (
                 <div
                   key={index}
-                  className="rounded-2xl p-[1px] bg-black border border-gray-800 shadow-[0_18px_40px_rgba(0,0,0,0.3)]"
+                  className="rounded-2xl p-[1px] bg-black border border-blue-300 shadow-[0_18px_40px_rgba(0,0,0,0.3)]"
                 >
                   <div className="h-full rounded-2xl bg-gray-800 px-6 py-6">
                     <p className="text-xs uppercase tracking-wide text-gray-400">{card.label}</p>
@@ -744,7 +748,7 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 bg-black">
+      <section id="skills" className="py-16 bg-black">
         <div className="container mx-auto px-6 max-w-6xl">
           <h2 className="mb-16 text-center text-4xl font-bold text-white">
             Technologies I Work With
@@ -755,7 +759,7 @@ export default function Home() {
                 key={index}
                 className="group relative rounded-2xl bg-black p-[1px] border border-gray-800 shadow-[0_12px_30px_rgba(0,0,0,0.6)]"
               >
-                <div className="flex h-full flex-col items-center justify-center gap-4 rounded-2xl bg-gray-900 px-6 py-8 text-center transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-gray-900/50">
+                <div className="flex h-full flex-col items-center justify-center gap-4 rounded-2xl border border-blue-300 bg-gray-900 px-6 py-8 text-center transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-gray-900/50">
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-900/30 text-4xl text-blue-400 group-hover:bg-blue-900/50 group-hover:text-blue-300">
                     {tech.icon}
                   </div>
@@ -768,7 +772,7 @@ export default function Home() {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-20 bg-black">
+      <section id="experience" className="py-16 bg-black">
         <div className="container mx-auto px-6 max-w-4xl">
           <h2 className="text-4xl font-bold text-center text-white mb-16">Work Experience</h2>
           <div className="space-y-12">
@@ -811,9 +815,9 @@ export default function Home() {
       </section>
 
       {/* Projects Section — Freepik-style expanding cards (desktop) */}
-      <section id="projects" className="py-20 bg-black">
+      <section id="projects" className="py-16 bg-black">
         <div className="mx-auto w-full max-w-[100rem] px-4 sm:px-6">
-          <h2 className="text-4xl font-bold text-center text-white mb-4">Featured Projects</h2>
+          <h2 className="text-4xl font-bold text-center text-white mb-10">Featured Projects</h2>
          
 
           {/* Mobile / small tablets: stacked cards */}
@@ -824,45 +828,44 @@ export default function Home() {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-gray-950 text-white shadow-lg active:scale-[0.99] transition-transform"
+                className="relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-gray-950 text-white shadow-lg transition-transform active:scale-[0.99]"
               >
-                <div className="relative h-48 w-full shrink-0">
+                <div className="relative hidden aspect-[4/3] w-full shrink-0 overflow-hidden bg-black/40">
                   <img
                     src={project.image}
                     alt={`${project.title} preview`}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="absolute inset-0 h-full w-full object-contain p-3 sm:p-4"
                   />
                   <div
-                    className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-45`}
+                    className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
                     aria-hidden
                   />
-                  <div
-                    className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"
-                    aria-hidden
-                  />
-                  <p className="absolute left-4 top-4 text-xs font-semibold uppercase tracking-widest text-white drop-shadow-md">
-                    {project.label}
-                  </p>
                 </div>
-                <div className="relative p-6">
-                  <div className="flex gap-4 items-start">
+                <div className="relative p-4 sm:p-5">
+                  <div className="flex items-start gap-3">
                     <span className="text-3xl shrink-0" aria-hidden>
                       {project.icon}
                     </span>
                     <div className="min-w-0">
-                      <h3 className="text-lg font-bold mb-2">{project.title}</h3>
-                      <p className="text-gray-300 text-sm mb-4 ">{project.description}</p>
+                      <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-blue-300/90">
+                        {project.label}
+                      </p>
+                      <h3 className="mb-2 text-xl font-bold leading-tight">{project.title}</h3>
+                      <p className="mb-4 text-sm leading-relaxed text-gray-300">{project.description}</p>
                       <div className="flex flex-wrap gap-2 mb-4">
-                        {project.tech.map((tech, techIndex) => (
+                        {project.tech.slice(0, 5).map((tech, techIndex) => (
                           <span
                             key={techIndex}
-                            className="px-2.5 py-0.5 rounded-full text-xs bg-white/10 border border-white/15"
+                            className="rounded-full border border-white/15 bg-white/10 px-2.5 py-0.5 text-xs"
                           >
                             {tech}
                           </span>
                         ))}
                       </div>
-                      <span className="text-sm font-medium text-blue-400">View project →</span>
+                      <span className="inline-flex items-center gap-1 text-sm font-semibold text-blue-400">
+                        View project
+                        <span aria-hidden>→</span>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -915,7 +918,7 @@ export default function Home() {
                     <h3 className="text-sm font-bold leading-snug text-white opacity-0 max-h-0 overflow-hidden transition-all duration-500 group-hover/card:opacity-100 group-hover/card:max-h-40 lg:text-base">
                       {project.title}
                     </h3>
-                    <p className="text-xs leading-relaxed text-white/80 line-clamp-4 opacity-0 max-h-0 overflow-hidden transition-all duration-500 group-hover/card:opacity-100 group-hover/card:max-h-32 lg:text-sm">
+                    <p className="text-xs leading-relaxed text-white/80 opacity-0 max-h-0 overflow-hidden transition-all duration-500 group-hover/card:opacity-100 group-hover/card:max-h-96 lg:text-sm">
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-1.5 opacity-0 max-h-0 overflow-hidden transition-all duration-500 delay-75 group-hover/card:opacity-100 group-hover/card:max-h-20">
@@ -943,7 +946,7 @@ export default function Home() {
       <CaseStudiesMotionSection />
 
       {/* Admin Portals Section */}
-      <section id="admin-portals" className="py-20 bg-black">
+      <section id="admin-portals" className="py-16 bg-black">
         <div className="container mx-auto px-6 max-w-6xl">
           <h2 className="text-4xl font-bold text-center text-white mb-16">Admin Portals</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
