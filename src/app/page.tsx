@@ -1112,7 +1112,7 @@ export default function Home() {
         <div className="container mx-auto px-6 text-center">
           <p className="text-gray-400 mb-8">Frontend Developer crafting digital experiences</p>
           <div className="text-gray-500 text-sm">
-            &copy; 2024 Rimsha Asif. All rights reserved.
+            &copy; 2026 Rimsha Asif. All rights reserved.
           </div>
         </div>
       </footer>
