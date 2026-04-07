@@ -3,6 +3,7 @@
 import Head from 'next/head';
 import { useState, useEffect, useRef } from 'react';
 import Lottie from 'lottie-react';
+import { motion } from 'framer-motion';
 import animationData from '@/app/animations/contact.json';
 import { 
   FaHtml5, 
@@ -31,6 +32,13 @@ import {
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 
 type MotionGalleryFrame = { readonly src: string; readonly caption: string };
+
+const TEXT_REVEAL_PROPS = {
+  initial: { opacity: 0, y: 18, filter: 'blur(6px)' },
+  whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
+  viewport: { once: true, amount: 0.3 },
+  transition: { duration: 0.88, ease: [0.22, 1, 0.36, 1] as const },
+} as const;
 
 const MOTION_GALLERY_ACCENTS = {
   orange: {
@@ -216,6 +224,7 @@ function CaseStudiesMotionSection() {
   const [studyIndex, setStudyIndex] = useState(0);
   const [slideIndex, setSlideIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const mainViewerScrollRef = useRef<HTMLDivElement>(null);
 
   const study = CASE_STUDIES[studyIndex];
@@ -244,15 +253,29 @@ function CaseStudiesMotionSection() {
     setSlideIndex((i) => (i + delta + n) % n);
   };
 
+  const markLoaded = (src: string) => {
+    setLoadedImages((prev) => (prev[src] ? prev : { ...prev, [src]: true }));
+  };
+
   return (
     <section id="case-studies" className="border-t border-white/5 bg-black py-6">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         <div className="mb-8 text-center lg:text-left">
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-gray-400">Portfolio</p>
-          <h2 className="mt-2 text-3xl font-bold text-white sm:text-4xl">Case studies</h2>
-          <p className="mx-auto mt-3 max-w-2xl text-gray-400 lg:mx-0">
+          <motion.p {...TEXT_REVEAL_PROPS} className="text-sm font-medium uppercase tracking-[0.2em] text-gray-400">Portfolio</motion.p>
+          <motion.h2
+            {...TEXT_REVEAL_PROPS}
+            transition={{ ...TEXT_REVEAL_PROPS.transition, delay: 0.05 }}
+            className="mt-2 text-3xl font-bold text-white sm:text-4xl"
+          >
+            Case studies
+          </motion.h2>
+          <motion.p
+            {...TEXT_REVEAL_PROPS}
+            transition={{ ...TEXT_REVEAL_PROPS.transition, delay: 0.1 }}
+            className="mx-auto mt-3 max-w-2xl text-gray-400 lg:mx-0"
+          >
           Explore a complete visual showcase of my projects—select any project to experience its design and user interface. If you’d like to see more in detail, click the link below.
-          </p>
+          </motion.p>
         </div>
 
         <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -313,9 +336,15 @@ function CaseStudiesMotionSection() {
                 <img
                   src={frame.src}
                   alt=""
-                  className="max-h-full max-w-full object-contain"
+                  className={`max-h-full max-w-full object-contain transition-opacity duration-300 ${
+                    loadedImages[frame.src] ? 'opacity-100' : 'opacity-0'
+                  }`}
                   loading="lazy"
+                  onLoad={() => markLoaded(frame.src)}
                 />
+                {!loadedImages[frame.src] && (
+                  <span className="absolute inset-0 animate-pulse bg-white/10" aria-hidden />
+                )}
               </button>
             ))}
           </div>
@@ -328,7 +357,7 @@ function CaseStudiesMotionSection() {
             <div className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 shadow-xl">
               <div
                 ref={mainViewerScrollRef}
-                className="w-full overflow-hidden"
+                className="w-full min-h-[320px] overflow-hidden sm:min-h-[430px] lg:min-h-[520px]"
               >
                 <div className="overflow-x-hidden">
                   <div
@@ -344,12 +373,20 @@ function CaseStudiesMotionSection() {
                         className="box-border flex shrink-0 justify-center px-2 py-3 sm:px-4 sm:py-5"
                         style={{ width: `${100 / n}%` }}
                       >
-                        <img
-                          src={frame.src}
-                          alt={frame.caption}
-                          className="h-auto max-h-[min(82vh,1100px)] w-full max-w-full object-contain object-top"
-                          loading={frame.src === frames[activeSlideIndex].src ? 'eager' : 'lazy'}
-                        />
+                        <div className="relative flex w-full items-start justify-center">
+                          {!loadedImages[frame.src] && (
+                            <span className="absolute inset-0 animate-pulse rounded-xl bg-white/10" aria-hidden />
+                          )}
+                          <img
+                            src={frame.src}
+                            alt={frame.caption}
+                            className={`h-auto max-h-[min(82vh,1100px)] w-full max-w-full object-contain object-top transition-opacity duration-500 ${
+                              loadedImages[frame.src] ? 'opacity-100' : 'opacity-0'
+                            }`}
+                            loading={frame.src === frames[activeSlideIndex].src ? 'eager' : 'lazy'}
+                            onLoad={() => markLoaded(frame.src)}
+                          />
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -389,9 +426,15 @@ function CaseStudiesMotionSection() {
                   <img
                     src={frame.src}
                     alt=""
-                    className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover/strip:scale-[1.02]"
+                    className={`max-h-full max-w-full object-contain transition-transform duration-500 group-hover/strip:scale-[1.02] ${
+                      loadedImages[frame.src] ? 'opacity-100' : 'opacity-0'
+                    }`}
                     loading="lazy"
+                    onLoad={() => markLoaded(frame.src)}
                   />
+                  {!loadedImages[frame.src] && (
+                    <span className="absolute inset-0 animate-pulse bg-white/10" aria-hidden />
+                  )}
                   <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white opacity-0 transition-opacity group-hover/strip:opacity-100 lg:text-xs">
                     {frame.caption}
                   </span>
@@ -571,7 +614,7 @@ export default function Home() {
       <nav className="fixed top-0 w-full bg-gray-900/90 backdrop-blur-sm z-50 shadow-sm shadow-gray-800/50">
         <div className="container mx-auto px-6 py-4 relative">
           <div className="flex items-center justify-between gap-6">
-            <div className="text-2xl font-bold text-blue-400">Rimsha Asif</div>
+            <div className="text-2xl font-bold text-blue-400">Rimsha Asif<span className="text-gray-300 text-sm"> ~ Portfolio</span> </div>
             <div className="hidden md:flex flex-1 justify-end space-x-8 items-center">
               {navItems.map((item) => (
                 <a
@@ -633,17 +676,28 @@ export default function Home() {
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-900/30 text-blue-400 text-sm font-medium">
+              <motion.div
+                {...TEXT_REVEAL_PROPS}
+                className="inline-flex items-center px-4 py-2 rounded-full bg-blue-900/30 text-blue-400 text-sm font-medium"
+              >
                 <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
                 Available for new projects
-              </div>
-              <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight">
+              </motion.div>
+              <motion.h1
+                {...TEXT_REVEAL_PROPS}
+                transition={{ ...TEXT_REVEAL_PROPS.transition, delay: 0.08 }}
+                className="text-5xl md:text-6xl font-bold text-white leading-tight"
+              >
                 Frontend
                 <span className="text-blue-400 block">Developer</span>
-              </h1>
-              <p className="text-xl text-gray-300 max-w-lg">
+              </motion.h1>
+              <motion.p
+                {...TEXT_REVEAL_PROPS}
+                transition={{ ...TEXT_REVEAL_PROPS.transition, delay: 0.14 }}
+                className="text-xl text-gray-300 max-w-lg"
+              >
                 I build responsive, scalable, and user-centric web applications using modern technologies like Next.js, React, and TypeScript.
-              </p>
+              </motion.p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <a href="#projects" className="bg-blue-500 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors shadow-lg text-center">
                   View My Work
@@ -690,18 +744,29 @@ export default function Home() {
         <div className="container mx-auto max-w-6xl px-6">
           <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="space-y-6">
-              <span className="inline-flex items-center rounded-full bg-blue-900/30 px-4 py-1 text-sm font-medium text-blue-400">
+              <motion.span
+                {...TEXT_REVEAL_PROPS}
+                className="inline-flex items-center rounded-full bg-blue-900/30 px-4 py-1 text-sm font-medium text-blue-400"
+              >
                 About Me
-              </span>
-              <h2 className="text-4xl font-bold leading-tight text-white">
+              </motion.span>
+              <motion.h2
+                {...TEXT_REVEAL_PROPS}
+                transition={{ ...TEXT_REVEAL_PROPS.transition, delay: 0.05 }}
+                className="text-4xl font-bold leading-tight text-white"
+              >
                 Building polished,<br/> human-friendly  products <br/> with a frontend lens
-              </h2>
-              <p className="text-lg leading-relaxed text-gray-300">
+              </motion.h2>
+              <motion.p
+                {...TEXT_REVEAL_PROPS}
+                transition={{ ...TEXT_REVEAL_PROPS.transition, delay: 0.1 }}
+                className="text-lg leading-relaxed text-gray-300"
+              >
                 I'm Rimsha Asif, a frontend engineer focused on translating ambitious product ideas
                 into resilient UI systems. I specialize in admin portals, SaaS platforms, and immersive
                 marketing experiences that balance performance with personality. My workflow blends
                 rapid prototyping, accessibility best practices, and thoughtful micro-interactions.
-              </p>
+              </motion.p>
               <div className="grid gap-4 sm:grid-cols-2">
                 {[
                   {
@@ -750,9 +815,12 @@ export default function Home() {
       {/* Skills Section */}
       <section id="skills" className="py-16 bg-black">
         <div className="container mx-auto px-6 max-w-6xl">
-          <h2 className="mb-16 text-center text-4xl font-bold text-white">
+          <motion.h2
+            {...TEXT_REVEAL_PROPS}
+            className="mb-16 text-center text-4xl font-bold text-white"
+          >
             Technologies I Work With
-          </h2>
+          </motion.h2>
           <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5">
             {technologies.map((tech, index) => (
               <div
@@ -774,7 +842,12 @@ export default function Home() {
       {/* Experience Section */}
       <section id="experience" className="py-16 bg-black">
         <div className="container mx-auto px-6 max-w-4xl">
-          <h2 className="text-4xl font-bold text-center text-white mb-16">Work Experience</h2>
+          <motion.h2
+            {...TEXT_REVEAL_PROPS}
+            className="text-4xl font-bold text-center text-white mb-16"
+          >
+            Work Experience
+          </motion.h2>
           <div className="space-y-12">
             {[
               {
@@ -817,7 +890,12 @@ export default function Home() {
       {/* Projects Section — Freepik-style expanding cards (desktop) */}
       <section id="projects" className="py-16 bg-black">
         <div className="mx-auto w-full max-w-[100rem] px-4 sm:px-6">
-          <h2 className="text-4xl font-bold text-center text-white mb-10">Featured Projects</h2>
+          <motion.h2
+            {...TEXT_REVEAL_PROPS}
+            className="text-4xl font-bold text-center text-white mb-10"
+          >
+            Featured Projects
+          </motion.h2>
          
 
           {/* Mobile / small tablets: stacked cards */}
@@ -948,7 +1026,12 @@ export default function Home() {
       {/* Admin Portals Section */}
       <section id="admin-portals" className="py-16 bg-black">
         <div className="container mx-auto px-6 max-w-6xl">
-          <h2 className="text-4xl font-bold text-center text-white mb-16">Admin Portals</h2>
+          <motion.h2
+            {...TEXT_REVEAL_PROPS}
+            className="text-4xl font-bold text-center text-white mb-16"
+          >
+            Admin Portals
+          </motion.h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
@@ -1023,10 +1106,19 @@ export default function Home() {
       <section id="contact" className="py-16 bg-black">
         <div className="container mx-auto px-6 max-w-5xl">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-white mb-4">Get In Touch</h2>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            <motion.h2
+              {...TEXT_REVEAL_PROPS}
+              className="text-4xl font-bold text-white mb-4"
+            >
+              Get In Touch
+            </motion.h2>
+            <motion.p
+              {...TEXT_REVEAL_PROPS}
+              transition={{ ...TEXT_REVEAL_PROPS.transition, delay: 0.08 }}
+              className="text-xl text-gray-300 max-w-2xl mx-auto"
+            >
               Have a project in mind or want to discuss opportunities? Feel free to reach out!
-            </p>
+            </motion.p>
           </div>
 
           <div className="bg-black rounded-2xl shadow-lg shadow-black/70 overflow-hidden border border-gray-800">
@@ -1110,7 +1202,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-black py-12 border-t border-gray-800">
         <div className="container mx-auto px-6 text-center">
-          <p className="text-gray-400 mb-8">Frontend Developer crafting digital experiences</p>
+          <p className="text-gray-400 mb-3">Frontend Developer crafting digital experiences</p>
           <div className="text-gray-500 text-sm">
             &copy; 2026 Rimsha Asif. All rights reserved.
           </div>
