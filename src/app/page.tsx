@@ -253,6 +253,11 @@ function CaseStudiesMotionSection() {
     setSlideIndex((i) => (i + delta + n) % n);
   };
 
+  const goStudy = (delta: number) => {
+    setStudyIndex((i) => (i + delta + CASE_STUDIES.length) % CASE_STUDIES.length);
+    setSlideIndex(0);
+  };
+
   const markLoaded = (src: string) => {
     setLoadedImages((prev) => (prev[src] ? prev : { ...prev, [src]: true }));
   };
@@ -300,27 +305,27 @@ function CaseStudiesMotionSection() {
               </button>
             ))}
           </div>
-          <div className="flex shrink-0 items-center justify-center gap-2 sm:justify-end">
+          {/* <div className="flex shrink-0 items-center justify-center gap-2 sm:justify-end">
             <button
               type="button"
-              onClick={() => go(-1)}
+              onClick={() => goStudy(-1)}
               className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition-colors hover:bg-white/10"
-              aria-label="Previous slide"
+              aria-label="Previous project"
             >
               <IoChevronBack className="h-6 w-6" />
             </button>
             <button
               type="button"
-              onClick={() => go(1)}
+              onClick={() => goStudy(1)}
               className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition-colors hover:bg-white/10"
-              aria-label="Next slide"
+              aria-label="Next project"
             >
               <IoChevronForward className="h-6 w-6" />
             </button>
-          </div>
+          </div> */}
         </div>
 
-        <p className="mb-6 text-sm text-gray-300 sm:text-base">{study.description}</p>
+        <p className="mb-6  text-sm text-gray-300 sm:text-base">{study.description}</p>
 
         <div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
           <div className="flex gap-2 overflow-x-auto pb-1 lg:hidden">
@@ -357,7 +362,7 @@ function CaseStudiesMotionSection() {
             <div className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 shadow-xl">
               <div
                 ref={mainViewerScrollRef}
-                className="w-full min-h-[320px] overflow-hidden sm:min-h-[430px] lg:min-h-[520px]"
+                className="aspect-[16/10] w-full overflow-hidden sm:aspect-auto sm:min-h-[400px] lg:min-h-[520px]"
               >
                 <div className="overflow-x-hidden">
                   <div
@@ -370,17 +375,17 @@ function CaseStudiesMotionSection() {
                     {frames.map((frame) => (
                       <div
                         key={frame.src}
-                        className="box-border flex shrink-0 justify-center px-2 py-3 sm:px-4 sm:py-5"
+                        className="box-border flex h-full shrink-0 justify-center px-1.5 py-2.5 sm:px-4 sm:py-5"
                         style={{ width: `${100 / n}%` }}
                       >
-                        <div className="relative flex w-full items-start justify-center">
+                        <div className="relative flex h-full w-full items-center justify-center">
                           {!loadedImages[frame.src] && (
                             <span className="absolute inset-0 animate-pulse rounded-xl bg-white/10" aria-hidden />
                           )}
                           <img
                             src={frame.src}
                             alt={frame.caption}
-                            className={`h-auto max-h-[min(82vh,1100px)] w-full max-w-full object-contain object-top transition-opacity duration-500 ${
+                            className={`h-auto max-h-[52vh] w-full max-w-full object-contain object-center transition-opacity duration-500 sm:max-h-[min(82vh,1100px)] ${
                               loadedImages[frame.src] ? 'opacity-100' : 'opacity-0'
                             }`}
                             loading={frame.src === frames[activeSlideIndex].src ? 'eager' : 'lazy'}
@@ -408,7 +413,7 @@ function CaseStudiesMotionSection() {
               >
                 <IoChevronForward className="h-5 w-5" />
               </button>
-              <div className="pointer-events-none absolute bottom-3 left-1/2 z-10 -translate-x-1/2 rounded-full bg-black/55 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+              <div className="pointer-events-none absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 rounded-full bg-black/55 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm md:block">
                 {activeSlideIndex + 1} / {n} · {frames[activeSlideIndex].caption}
               </div>
             </div>
@@ -442,7 +447,7 @@ function CaseStudiesMotionSection() {
               ))}
             </div>
 
-            <p className="text-center text-sm text-gray-500 md:hidden">
+            <p className="text-center w-full text-sm leading-tight text-gray-500 md:hidden">
               {activeSlideIndex + 1} / {n} — {frames[activeSlideIndex].caption}
             </p>
 
