@@ -362,7 +362,7 @@ function CaseStudiesMotionSection() {
             <div className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 shadow-xl">
               <div
                 ref={mainViewerScrollRef}
-                className="aspect-[16/10] w-full overflow-hidden sm:aspect-auto sm:min-h-[400px] lg:min-h-[520px]"
+                className="aspect-[18/10] w-full flex justify-center items-center overflow-hidden sm:aspect-auto sm:min-h-[400px] lg:min-h-[520px]"
               >
                 <div className="overflow-x-hidden">
                   <div
