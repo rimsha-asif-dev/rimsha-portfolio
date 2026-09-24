@@ -5,29 +5,30 @@ import { useState, useEffect, useRef } from 'react';
 import Lottie from 'lottie-react';
 import { motion } from 'framer-motion';
 import animationData from '@/app/animations/contact.json';
-import { 
-  FaHtml5, 
-  FaCss3Alt, 
-  FaJs, 
-  FaReact, 
-  FaAws, 
-  FaGithub, 
-  FaFigma 
+import {
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaReact,
+  FaAws,
+  FaGithub,
+  FaFigma
 } from 'react-icons/fa';
-import { RiNextjsFill, RiServerLine } from 'react-icons/ri';
-import { 
-  SiTailwindcss, 
-  SiMui, 
-  SiBootstrap, 
-  SiTypescript, 
-  SiReactquery, 
-  SiApollographql, 
-  SiFirebase, 
+import { RiNextjsFill, RiNodejsFill, RiServerLine } from 'react-icons/ri';
+import {
+  SiTailwindcss,
+  SiMui,
+  SiBootstrap,
+  SiTypescript,
+  SiReactquery,
+  SiApollographql,
+  SiFirebase,
   SiLeaflet,
   SiMapbox,
   SiRedux,
   SiShadcnui,
-  SiStripe
+  SiStripe,
+  SiMongodb
 } from 'react-icons/si';
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 
@@ -111,7 +112,7 @@ const GLYMPSE_MOTION_FRAMES = [
   { src: '/glypmse-2.png', caption: 'Create account' },
   { src: '/glympse.png', caption: 'Employer dashboard' },
   { src: '/glympse-4.png', caption: 'My all jobs' },
- 
+
 
   { src: '/glypmse-3.png', caption: 'Product views' },
   { src: '/glypmse-5.png', caption: 'Jobs workspace' },
@@ -135,7 +136,7 @@ const VET_YOUR_PEP_MOTION_FRAMES = [
   { src: '/vet-4.png', caption: 'Community' },
   { src: '/vet-5.png', caption: 'Account settings' },
   { src: '/vet-6.png', caption: 'Messages' },
-  
+
 ] as const;
 
 const SKYVIEWS_MOTION_FRAMES = [
@@ -279,7 +280,7 @@ function CaseStudiesMotionSection() {
             transition={{ ...TEXT_REVEAL_PROPS.transition, delay: 0.1 }}
             className="mx-auto mt-3 max-w-2xl text-gray-400 lg:mx-0"
           >
-          Explore a complete visual showcase of my projects—select any project to experience its design and user interface. If you’d like to see more in detail, click the link below.
+            Explore a complete visual showcase of my projects—select any project to experience its design and user interface. If you’d like to see more in detail, click the link below.
           </motion.p>
         </div>
 
@@ -295,11 +296,10 @@ function CaseStudiesMotionSection() {
                   setStudyIndex(i);
                   setSlideIndex(0);
                 }}
-                className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
-                  i === studyIndex
+                className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${i === studyIndex
                     ? CASE_STUDY_TAB_ACTIVE[s.accent]
                     : 'bg-white text-gray-600 hover:bg-white/10 hover:text-white'
-                }`}
+                  }`}
               >
                 {s.label}
               </button>
@@ -334,16 +334,14 @@ function CaseStudiesMotionSection() {
                 key={frame.src}
                 type="button"
                 onClick={() => setSlideIndex(i)}
-                className={`relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 bg-zinc-950 transition-all lg:h-[4.5rem] lg:w-full ${
-                  i === activeSlideIndex ? a.thumbActive : 'border-transparent opacity-70 hover:opacity-100'
-                }`}
+                className={`relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 bg-zinc-950 transition-all lg:h-[4.5rem] lg:w-full ${i === activeSlideIndex ? a.thumbActive : 'border-transparent opacity-70 hover:opacity-100'
+                  }`}
               >
                 <img
                   src={frame.src}
                   alt=""
-                  className={`max-h-full max-w-full object-contain transition-opacity duration-300 ${
-                    loadedImages[frame.src] ? 'opacity-100' : 'opacity-0'
-                  }`}
+                  className={`max-h-full max-w-full object-contain transition-opacity duration-300 ${loadedImages[frame.src] ? 'opacity-100' : 'opacity-0'
+                    }`}
                   loading="lazy"
                   onLoad={() => markLoaded(frame.src)}
                 />
@@ -385,9 +383,8 @@ function CaseStudiesMotionSection() {
                           <img
                             src={frame.src}
                             alt={frame.caption}
-                            className={`h-auto max-h-[52vh] w-full max-w-full object-contain object-center transition-opacity duration-500 sm:max-h-[min(82vh,1100px)] ${
-                              loadedImages[frame.src] ? 'opacity-100' : 'opacity-0'
-                            }`}
+                            className={`h-auto max-h-[52vh] w-full max-w-full object-contain object-center transition-opacity duration-500 sm:max-h-[min(82vh,1100px)] ${loadedImages[frame.src] ? 'opacity-100' : 'opacity-0'
+                              }`}
                             loading={frame.src === frames[activeSlideIndex].src ? 'eager' : 'lazy'}
                             onLoad={() => markLoaded(frame.src)}
                           />
@@ -424,16 +421,14 @@ function CaseStudiesMotionSection() {
                   key={`strip-${frame.src}`}
                   type="button"
                   onClick={() => setSlideIndex(i)}
-                  className={`group/strip relative flex min-h-0 min-w-0 flex-1 basis-0 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 transition-[flex-grow] duration-500 ease-out hover:flex-[2] ${
-                    i === activeSlideIndex ? a.stripActive : ''
-                  }`}
+                  className={`group/strip relative flex min-h-0 min-w-0 flex-1 basis-0 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 transition-[flex-grow] duration-500 ease-out hover:flex-[2] ${i === activeSlideIndex ? a.stripActive : ''
+                    }`}
                 >
                   <img
                     src={frame.src}
                     alt=""
-                    className={`max-h-full max-w-full object-contain transition-transform duration-500 group-hover/strip:scale-[1.02] ${
-                      loadedImages[frame.src] ? 'opacity-100' : 'opacity-0'
-                    }`}
+                    className={`max-h-full max-w-full object-contain transition-transform duration-500 group-hover/strip:scale-[1.02] ${loadedImages[frame.src] ? 'opacity-100' : 'opacity-0'
+                      }`}
                     loading="lazy"
                     onLoad={() => markLoaded(frame.src)}
                   />
@@ -583,6 +578,8 @@ export default function Home() {
     { name: 'JavaScript', icon: <FaJs className="text-[#f7df1e]" /> },
     { name: 'React JS', icon: <FaReact className="text-[#61dafb]" /> },
     { name: 'Next JS', icon: <RiNextjsFill className="text-white" /> },
+    { name: 'Node JS', icon: <RiNodejsFill className="text-white" /> },
+    { name: 'MongoDb', icon: <SiMongodb className="text-white" /> },
     { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-[#38bdf8]" /> },
     { name: 'Material UI', icon: <SiMui className="text-[#007fff]" /> },
     { name: 'Bootstrap', icon: <SiBootstrap className="text-[#7952b3]" /> },
@@ -604,8 +601,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black">
       <Head>
-        <title>Rimsha Asif - Frontend Developer</title>
-        <meta name="description" content="Frontend Developer with 3+ years of experience building responsive web applications" />
+        <title>Rimsha Asif - Full Stack Developer</title>
+        <meta name="description" content="Full Stack Developer with 2+ years of experience building responsive web applications" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -626,11 +623,10 @@ export default function Home() {
                   key={item}
                   href={`#${item.toLowerCase()}`}
                   onClick={() => setActiveSection(item.toLowerCase())}
-                  className={`font-medium transition-colors ${
-                    activeSection === item.toLowerCase() 
-                      ? 'text-blue-400' 
+                  className={`font-medium transition-colors ${activeSection === item.toLowerCase()
+                      ? 'text-blue-400'
                       : 'text-gray-300 hover:text-blue-400'
-                  }`}
+                    }`}
                 >
                   {item}
                 </a>
@@ -662,11 +658,10 @@ export default function Home() {
                     setActiveSection(item.toLowerCase());
                     setIsMenuOpen(false);
                   }}
-                  className={`block text-lg font-medium ${
-                    activeSection === item.toLowerCase()
+                  className={`block text-lg font-medium ${activeSection === item.toLowerCase()
                       ? 'text-blue-400'
                       : 'text-gray-200'
-                  }`}
+                    }`}
                 >
                   {item}
                 </a>
@@ -693,7 +688,7 @@ export default function Home() {
                 transition={{ ...TEXT_REVEAL_PROPS.transition, delay: 0.08 }}
                 className="text-5xl md:text-6xl font-bold text-white leading-tight"
               >
-                Frontend
+                Full Stack
                 <span className="text-blue-400 block">Developer</span>
               </motion.h1>
               <motion.p
@@ -710,7 +705,7 @@ export default function Home() {
               </div>
             </div>
             <div className="relative">
-            <div className="bg-blue-600 rounded-2xl p-8 text-white shadow-2xl border border-gray-800">
+              <div className="bg-blue-600 rounded-2xl p-8 text-white shadow-2xl border border-gray-800">
                 <div className="grid grid-cols-2 gap-6">
                   <div className="bg-white/20 rounded-xl p-4 backdrop-blur-sm">
                     <div className="text-3xl font-bold">3+</div>
@@ -760,29 +755,27 @@ export default function Home() {
                 transition={{ ...TEXT_REVEAL_PROPS.transition, delay: 0.05 }}
                 className="text-4xl font-bold leading-tight text-white"
               >
-                Building polished,<br/> human-friendly  products <br/> with a frontend lens
+                Building polished,<br /> human-friendly  products <br /> with a frontend lens
               </motion.h2>
               <motion.p
                 {...TEXT_REVEAL_PROPS}
                 transition={{ ...TEXT_REVEAL_PROPS.transition, delay: 0.1 }}
                 className="text-lg leading-relaxed text-gray-300"
               >
-                I'm Rimsha Asif, a frontend engineer focused on translating ambitious product ideas
-                into resilient UI systems. I specialize in admin portals, SaaS platforms, and immersive
-                marketing experiences that balance performance with personality. My workflow blends
-                rapid prototyping, accessibility best practices, and thoughtful micro-interactions.
+                I'm Rimsha Asif, a Full Stack Developer focused on transforming ambitious product ideas into scalable, reliable web applications. I specialize in building SaaS platforms, admin portals, and dynamic web experiences across both frontend and backend. My expertise spans React.js, Next.js, Node.js, Express.js, TypeScript, MongoDB, PostgreSQL, and AWS, with a focus on clean architecture, performance, seamless API integrations, and user-friendly experiences.
+
               </motion.p>
               <div className="grid gap-4 sm:grid-cols-2">
                 {[
                   {
                     title: 'Product mindset',
                     description:
-                      'Take Figma explorations to production with scalable components, design tokens, and polished handoffs.'
+                      'Taking features from database schema design and secure API creation all the way to responsive frontend implementation and deployment.'
                   },
                   {
-                    title: 'Collaboration first',
+                    title: 'System Integration',
                     description:
-                      'Partner with designers, PMs, and backend engineers to keep roadmaps unblocked and quality high.'
+                      'Bridging frontend interfaces with robust backend logic, optimizing data flow, and managing third-party cloud services efficiently.'
                   }
                 ].map((item, index) => (
                   <div
@@ -798,8 +791,8 @@ export default function Home() {
             <div className="grid gap-4">
               {[
                 { label: 'Education', value: 'Bachelor in Computer Science · 2022', accent: 'from-sky-500 to-cyan-500' },
-                { label: 'Principles', value: 'Performance, accessibility, empathy', accent: 'from-amber-500 to-orange-500' },
-                { label: 'Interests', value: 'UI polish, real-time UX, scalable design systems', accent: 'from-blue-500 to-indigo-500' },
+                { label: 'Principles', value: 'Scalability, security, clean code', accent: 'from-amber-500 to-orange-500' },
+                { label: 'Interests', value: 'Cloud architecture, database optimization, distributed systems', accent: 'from-blue-500 to-indigo-500' },
                 { label: 'Languages', value: 'English, Urdu, Punjabi', accent: 'from-purple-500 to-pink-500' },
               ].map((card, index) => (
                 <div
@@ -857,7 +850,7 @@ export default function Home() {
             {[
               {
                 company: 'Bytevia Solutions',
-                position: 'Frontend Developer',
+                position: 'Full Stack Developer',
                 period: 'March 2024 - Present',
                 description: 'Developed responsive web interfaces from Figma designs. Implemented dynamic data integrations with REST and GraphQL APIs, and built real-time chat modules using Sendbird.'
               },
@@ -901,7 +894,7 @@ export default function Home() {
           >
             Featured Projects
           </motion.h2>
-         
+
 
           {/* Mobile / small tablets: stacked cards */}
           <div className="flex flex-col gap-4 md:hidden">
@@ -1081,11 +1074,10 @@ export default function Home() {
                 <div className="relative bg-black rounded-2xl p-6 h-full border border-gray-700">
                   <div className="flex justify-between items-start mb-4">
                     <h3 className="text-xl font-bold text-white">{portal.title}</h3>
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      portal.status === 'Completed' ? 'bg-green-900/30 text-green-300' :
-                      portal.status === 'In Progress' ? 'bg-yellow-900/30 text-yellow-300' :
-                      'bg-blue-900/30 text-blue-300'
-                    }`}>
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${portal.status === 'Completed' ? 'bg-green-900/30 text-green-300' :
+                        portal.status === 'In Progress' ? 'bg-yellow-900/30 text-yellow-300' :
+                          'bg-blue-900/30 text-blue-300'
+                      }`}>
                       {portal.status}
                     </span>
                   </div>
@@ -1131,7 +1123,7 @@ export default function Home() {
               {/* Contact Info Sidebar */}
               <div className="bg-black text-white p-8 md:p-10 border-b md:border-b-0 md:border-r border-gray-800">
                 <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
-                
+
                 <div className="space-y-6">
                   <div className="flex items-start space-x-4">
                     <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
@@ -1162,8 +1154,8 @@ export default function Home() {
                 <div className="mt-8 pt-6 border-t border-white/20">
                   <h4 className="font-semibold mb-4">Connect With Me</h4>
                   <div className="flex space-x-4">
-                    <a 
-                      href="https://www.linkedin.com/in/rimsha-asif-093786264/" 
+                    <a
+                      href="https://www.linkedin.com/in/rimsha-asif-093786264/"
                       className="w-60 h-10 bg-white/20 rounded-lg flex items-center justify-center hover:bg-white/30 transition-colors"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -1207,7 +1199,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-black py-12 border-t border-gray-800">
         <div className="container mx-auto px-6 text-center">
-          <p className="text-gray-400 mb-3">Frontend Developer crafting digital experiences</p>
+          <p className="text-gray-400 mb-3">Full Stack Developer crafting digital experiences</p>
           <div className="text-gray-500 text-sm">
             &copy; 2026 Rimsha Asif. All rights reserved.
           </div>

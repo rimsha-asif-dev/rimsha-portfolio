@@ -9,7 +9,7 @@ export default function Experience() {
 
   const experienceData = [
     {
-      title: "Frontend Web Developer",
+      title: "Full Stack Developer",
       company: "Bytevia Technologies",
       type: "Full-time",
       location: "Lahore, Punjab, Pakistan · Remote",
