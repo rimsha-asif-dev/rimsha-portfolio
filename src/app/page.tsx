@@ -15,22 +15,25 @@ import {
   FaFigma
 } from 'react-icons/fa';
 import { RiNextjsFill, RiNodejsFill, RiServerLine } from 'react-icons/ri';
+import { TbApi } from 'react-icons/tb';
 import {
   SiTailwindcss,
   SiMui,
   SiBootstrap,
   SiTypescript,
   SiReactquery,
-  SiApollographql,
+  SiGraphql,
   SiFirebase,
   SiLeaflet,
   SiMapbox,
   SiRedux,
   SiShadcnui,
+  SiPostgresql,
   SiStripe,
   SiMongodb
 } from 'react-icons/si';
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
+import HeroOrbit from './components/OrbitRing';
 
 type MotionGalleryFrame = { readonly src: string; readonly caption: string };
 
@@ -573,25 +576,27 @@ export default function Home() {
   const navItems = ['Home', 'About', 'Skills', 'Experience', 'Projects', 'Contact'];
 
   const technologies = [
+    { name: 'React JS', icon: <FaReact className="text-[#61dafb]" /> },
+    { name: 'Next JS', icon: <RiNextjsFill className="text-white" /> },
     { name: 'HTML5', icon: <FaHtml5 className="text-[#f16529]" /> },
     { name: 'CSS', icon: <FaCss3Alt className="text-[#2965f1]" /> },
     { name: 'JavaScript', icon: <FaJs className="text-[#f7df1e]" /> },
-    { name: 'React JS', icon: <FaReact className="text-[#61dafb]" /> },
-    { name: 'Next JS', icon: <RiNextjsFill className="text-white" /> },
+    { name: 'TypeScript', icon: <SiTypescript className="text-[#3178c6]" /> },
     { name: 'Node JS', icon: <RiNodejsFill className="text-white" /> },
     { name: 'MongoDb', icon: <SiMongodb className="text-white" /> },
+    { name: 'PostgreSQL', icon: <SiPostgresql className="text-[#4169E1]" /> },
     { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-[#38bdf8]" /> },
     { name: 'Material UI', icon: <SiMui className="text-[#007fff]" /> },
     { name: 'Bootstrap', icon: <SiBootstrap className="text-[#7952b3]" /> },
     { name: 'Shadcn/Ui', icon: <SiShadcnui className="text-gray-300" /> },
-    { name: 'TypeScript', icon: <SiTypescript className="text-[#3178c6]" /> },
     { name: 'AWS (S3)', icon: <FaAws className="text-[#ff9900]" /> },
     { name: 'React Query', icon: <SiReactquery className="text-[#ff4154]" /> },
-    { name: 'Redux', icon: <SiRedux className="text-[#764ABC]" /> },
+    { name: 'Redux', icon: <SiRedux  className="text-[#764ABC]" /> },
     { name: 'Rest API', icon: <RiServerLine className="text-[#5a31f4]" /> },
-    { name: 'Graphql', icon: <SiApollographql className="text-[#5a31f4]" /> },
+    { name: 'Graphql', icon: <SiGraphql className="text-[#5a31f4]" /> },
     { name: 'Stripe', icon: <SiStripe className="text-[#5a31f4]" /> },
     { name: 'Mapbox', icon: <SiMapbox className="text-gray-300" /> },
+
     { name: 'Git', icon: <FaGithub className="text-gray-200" /> },
     { name: 'Firebase', icon: <SiFirebase className="text-[#ffca28]" /> },
     { name: 'Figma', icon: <FaFigma className="text-[#f24e1e]" /> }
@@ -672,7 +677,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-14 pb-20 px-6 bg-black">
+      <section id="home" className="lg:pt-8 pt-16 pb-20 px-6 bg-black">
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
@@ -681,15 +686,15 @@ export default function Home() {
                 className="inline-flex items-center px-4 py-2 rounded-full bg-blue-900/30 text-blue-400 text-sm font-medium"
               >
                 <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
-                Available for new projects
+               Full Stack Developer
               </motion.div>
               <motion.h1
                 {...TEXT_REVEAL_PROPS}
                 transition={{ ...TEXT_REVEAL_PROPS.transition, delay: 0.08 }}
                 className="text-5xl md:text-6xl font-bold text-white leading-tight"
               >
-                Full Stack
-                <span className="text-blue-400 block">Developer</span>
+               Hi, I'm
+                <span className="text-blue-400 block">Rimsha Asif</span>
               </motion.h1>
               <motion.p
                 {...TEXT_REVEAL_PROPS}
@@ -704,7 +709,7 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="relative">
+            {/* <div className="relative">
               <div className="bg-blue-600 rounded-2xl p-8 text-white shadow-2xl border border-gray-800">
                 <div className="grid grid-cols-2 gap-6">
                   <div className="bg-white/20 rounded-xl p-4 backdrop-blur-sm">
@@ -734,13 +739,14 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
+            <HeroOrbit technologies={technologies} />
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-16 bg-black">
+      <section id="about" className="py-10 bg-black">
         <div className="container mx-auto max-w-6xl px-6">
           <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="space-y-6">
@@ -748,6 +754,7 @@ export default function Home() {
                 {...TEXT_REVEAL_PROPS}
                 className="inline-flex items-center rounded-full bg-blue-900/30 px-4 py-1 text-sm font-medium text-blue-400"
               >
+                <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
                 About Me
               </motion.span>
               <motion.h2
@@ -826,7 +833,7 @@ export default function Home() {
                 className="group relative rounded-2xl bg-black p-[1px] border border-gray-800 shadow-[0_12px_30px_rgba(0,0,0,0.6)]"
               >
                 <div className="flex h-full flex-col items-center justify-center gap-4 rounded-2xl border border-blue-300 bg-gray-900 px-6 py-8 text-center transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-gray-900/50">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-900/30 text-4xl text-blue-400 group-hover:bg-blue-900/50 group-hover:text-blue-300">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue text-4xl text-blue-400 group-hover:bg-blue-900/50 group-hover:text-blue-300">
                     {tech.icon}
                   </div>
                   <p className="text-sm font-semibold text-gray-200">{tech.name}</p>
@@ -852,7 +859,7 @@ export default function Home() {
                 company: 'Bytevia Solutions',
                 position: 'Full Stack Developer',
                 period: 'March 2024 - Present',
-                description: 'Developed responsive web interfaces from Figma designs. Implemented dynamic data integrations with REST and GraphQL APIs, and built real-time chat modules using Sendbird.'
+                description: 'Developed responsive full-stack web applications by translating Figma designs into user-friendly interfaces. Integrated REST and GraphQL APIs, collaborated on backend functionality, and implemented real-time chat modules using Sendbird. Worked with modern web technologies to deliver scalable and efficient application features.'
               },
               {
                 company: 'Chirp Technologies',
